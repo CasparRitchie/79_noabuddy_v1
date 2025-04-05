@@ -1,0 +1,28 @@
+name: noabuddy_flutter_app
+description: "A relationship guidance assistant with Flutter & WebSocket."
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.7.2
+
+dependencies:
+  cupertino_icons: ^1.0.2
+  flutter:
+    sdk: flutter
+  flutter_audio_waveforms: ^1.0.8
+  http: ^0.13.6
+  http_parser: ^4.0.2
+  js: ^0.7.2
+  provider: ^6.0.5
+  speech_to_text: ^6.6.2
+  web_socket_channel: ^2.3.0
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+flutter:
+  uses-material-design: true
