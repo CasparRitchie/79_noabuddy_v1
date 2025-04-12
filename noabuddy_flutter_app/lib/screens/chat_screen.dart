@@ -58,7 +58,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
       if (response.statusCode == 200) {
         final data = json.decode(responseBody);
-        final userSaid = data['user'] ?? '';
+        final userSaid = data['transcript'] ?? '';
         final botResponse = data['response'] ?? '🤖 No reply received';
 
         setState(() {

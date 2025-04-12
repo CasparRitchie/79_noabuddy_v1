@@ -148,28 +148,28 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   final List<_OnboardContent> _pages = [
     _OnboardContent(
-      backgroundImage: 'lib/assets/images/onboarding_bg.png',
-      logo: 'lib/assets/images/noabuddy_logo.png',
+      backgroundImage: 'assets/images/onboarding_bg.png',
+      logo: 'assets/images/noabuddy_logo.png',
       title: "Welcome to NoaBuddy",
       subtitle: "Helping you connect when you need it most.",
       buttonText: "Next",
     ),
     _OnboardContent(
-      logo: 'lib/assets/images/noabuddy_logo.png',
+      logo: 'assets/images/noabuddy_logo.png',
       title: "How NoaBuddy works...",
       subtitle:
           "Acting as your relationship companion, NoaBuddy uses proven therapy practices to help couples navigate their relationships in real time.",
       buttonText: "Next",
     ),
     _OnboardContent(
-      logo: 'lib/assets/images/noabuddy_logo.png',
+      logo: 'assets/images/noabuddy_logo.png',
       title: "Choose your Privacy...",
       subtitle:
           "Save conversations to learn and improve,\nor delete chats after each session.",
       buttonText: "Next",
     ),
     _OnboardContent(
-      logo: 'lib/assets/images/noabuddy_logo.png',
+      logo: 'assets/images/noabuddy_logo.png',
       title: "Noa Buddy",
       subtitle: "Ready?",
       buttonText: "Let’s get started",
