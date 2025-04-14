@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
+import 'dart:html' as html; // 🔊 For TTS in browser
 import '../services/web_recorder.dart';
 
 class ChatScreen extends StatefulWidget {
@@ -16,6 +17,12 @@ class _ChatScreenState extends State<ChatScreen> {
   final List<Map<String, dynamic>> _messages = [];
   final WebRecorder _recorder = WebRecorder();
   bool _isRecording = false;
+  void _speak(String text) {
+  final utterance = html.SpeechSynthesisUtterance(text);
+  html.window.speechSynthesis?.cancel(); // ✅ safe null-aware access
+  html.window.speechSynthesis?.speak(utterance); // ✅ safe null-aware access
+}
+
 
   Future<void> _startRecording() async {
     try {
@@ -40,10 +47,9 @@ class _ChatScreenState extends State<ChatScreen> {
       final audioBytes = await _recorder.stopRecording();
       print("📦 Audio byte length: ${audioBytes.length}");
 
-
       final request = http.MultipartRequest(
         'POST',
-        Uri.parse('http://localhost:8000/api/speak'),
+        Uri.parse('https://f8cd-82-1-18-199.ngrok-free.app/api/speak'),
       );
 
       request.files.add(http.MultipartFile.fromBytes(
@@ -67,6 +73,9 @@ class _ChatScreenState extends State<ChatScreen> {
           }
           _messages.add({'text': botResponse, 'isUser': false});
         });
+
+        // 🔊 Speak the bot's reply aloud
+        _speak(botResponse);
       } else {
         setState(() {
           _messages.add({
@@ -82,6 +91,7 @@ class _ChatScreenState extends State<ChatScreen> {
       });
     }
   }
+
 
   Widget _buildMessage(Map<String, dynamic> msg) {
     return Align(
