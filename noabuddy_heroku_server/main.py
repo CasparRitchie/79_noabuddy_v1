@@ -1,14 +1,12 @@
-from flask import Flask, send_from_directory
+from fastapi import FastAPI
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 
-app = Flask(__name__, static_folder="build", static_url_path="")
+app = FastAPI()
 
-@app.route("/")
-def index():
-    return send_from_directory(app.static_folder, "index.html")
+# Serve frontend build
+app.mount("/", StaticFiles(directory="build", html=True), name="frontend")
 
-@app.route("/<path:path>")
-def serve_file(path):
-    return send_from_directory(app.static_folder, path)
-
-if __name__ == "__main__":
-    app.run(debug=True)
+@app.get("/")
+async def serve_index():
+    return FileResponse("build/index.html")

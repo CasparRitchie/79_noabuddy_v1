@@ -49,7 +49,9 @@ class _ChatScreenState extends State<ChatScreen> {
 
       final request = http.MultipartRequest(
         'POST',
-        Uri.parse('https://f8cd-82-1-18-199.ngrok-free.app/api/speak'),
+        // Uri.parse('https://f8cd-82-1-18-199.ngrok-free.app/api/speak'),
+        Uri.parse('https://noabuddy-v1-a82fc408a503.herokuapp.com/api/speak'),
+
       );
 
       request.files.add(http.MultipartFile.fromBytes(
