@@ -1,0 +1,13 @@
+# Ignore virtual environment
+venv/
+__pycache__/
+*.pyc
+
+# Ignore macOS system files
+.DS_Store
+
+# Ignore model files or large binaries (optional, depending on use)
+*.dylib
+*.so
+*.pkl
+*.onnx
