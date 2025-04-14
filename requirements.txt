@@ -229,7 +229,7 @@
 # pyparsing==3.2.3
 # python-dateutil==2.9.0.post0
 # python-dotenv==1.1.0
-# python-multipart==0.0.20
+python-multipart==0.0.20
 # # pytorch-lightning==2.5.1
 # # pytorch-metric-learning==2.8.1
 # pyttsx3==2.90
