@@ -38,7 +38,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-MODEL_PATH = os.path.abspath("../vosk_model/vosk-model-small-en-us-0.15")
+MODEL_PATH = os.path.abspath("vosk_model/vosk-model-small-en-us-0.15")
 AUDIO_DIR = "uploads"
 os.makedirs(AUDIO_DIR, exist_ok=True)
 
