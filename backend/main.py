@@ -1,27 +1,32 @@
 from fastapi import FastAPI, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
-import sys
-import os
-
-
-# 🧠 Patch pyttsx3 NSSSpeechDriver with objc *before anything else*
-if sys.platform == 'darwin':
-    try:
-        import objc
-        import pyttsx3.drivers.nsss
-        pyttsx3.drivers.nsss.objc = objc
-    except ImportError as e:
-        print("❌ pyobjc or pyttsx3 not installed correctly:", e)
-        raise
-
-import pyttsx3
-
 import uuid
 import json
 import wave
 import subprocess
 import ollama
 import vosk
+import sys
+import os
+
+# --- Optional pyttsx3 for local TTS ---
+tts_engine = None
+try:
+    if os.getenv("HEROKU_DEPLOYED") != "true":
+        import pyttsx3
+        if sys.platform == 'darwin':
+            try:
+                import objc
+                import pyttsx3.drivers.nsss
+                pyttsx3.drivers.nsss.objc = objc
+            except ImportError as e:
+                print("❌ pyobjc or pyttsx3 not installed correctly:", e)
+                raise
+        tts_engine = pyttsx3.init()
+except ImportError:
+    print("⚠️ pyttsx3 not available — skipping local TTS.")
+
+
 
 # --- App setup ---
 app = FastAPI()
@@ -80,12 +85,12 @@ def transcribe_wav(path):
 
 
 def speak_response(text):
-    if not ENABLE_TTS:
+    if not tts_engine:
         return
-    engine = pyttsx3.init()
-    engine.setProperty('rate', 175)
-    engine.say(text)
-    engine.runAndWait()
+    tts_engine.setProperty('rate', 175)
+    tts_engine.say(text)
+    tts_engine.runAndWait()
+
 
 
 def chat_with_ollama(text):
