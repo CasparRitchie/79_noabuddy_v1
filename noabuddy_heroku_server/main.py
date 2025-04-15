@@ -5,7 +5,7 @@ from fastapi.responses import FileResponse
 app = FastAPI()
 
 # Serve frontend build
-app.mount("/", StaticFiles(directory="build", html=True), name="frontend")
+app.mount("/", StaticFiles(directory="noabuddy_heroku_server/build", html=True), name="frontend")
 
 @app.get("/")
 async def serve_index():
